@@ -30,9 +30,9 @@ async def on_ready():
 
 #function for random message
 async def send_random_phrase():
+    x = 1
     while True:
         #message counter
-        x = 1
 
         #random channel picker
         channel_id = random.choice(random_channel)
