@@ -1,5 +1,5 @@
 {
-    //Enter ywo intervals here,they will be taken in sec in default
+    //Enter any two intervals here,they will be taken in sec in default
     "intervals": {
         "min": 10,
         "max": 25
