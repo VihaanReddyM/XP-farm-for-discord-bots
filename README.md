@@ -11,8 +11,8 @@ step 5. Search for sarter.bat and double click it and the program will automatic
 
 # Features
 The features include :
-&nbsp;&nbsp;&nbsp;&nbsp;1)You can use multiple tokens 
-&nbsp;&nbsp;&nbsp;&nbsp;2)The bot can use multiple channel ids and send a random sentence in anyone of the channel ids that you have provided it
-&nbsp;&nbsp;&nbsp;&nbsp;3)Much knowledge for coding is not required.
-&nbsp;&nbsp;&nbsp;&nbsp;4)It is constantly being updated with new features all the time
+&nbsp;&nbsp;&nbsp;&nbsp;1)You can use multiple tokens   
+&nbsp;&nbsp;&nbsp;&nbsp;2)The bot can use multiple channel ids and send a random sentence in anyone of the channel ids that you have provided it   
+&nbsp;&nbsp;&nbsp;&nbsp;3)Much knowledge for coding is not required.   
+&nbsp;&nbsp;&nbsp;&nbsp;4)It is constantly being updated with new features all the time   
 
