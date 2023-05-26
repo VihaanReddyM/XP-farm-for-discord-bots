@@ -10,14 +10,16 @@ client = discord.Client()
 settings_file = 'config.json'
 phrases_file = 'phrases.json'
 
+#Making time work
+
 now = datetime.now()
-time = now.strftime("%H:%M:%S")
+time_ = now.strftime("%H:%M:%S")
 
 
 #json file loaders
 with open(settings_file) as file:
     config_data = json.load(file)
-    token = config_data['token']
+    token_1 = config_data['token_1']
     intervals = config_data['intervals']
     random_channel = config_data['channel_ids']
 
@@ -28,8 +30,7 @@ with open(phrases_file) as file:
 #bot starter key
 @client.event
 async def on_ready():
-    print('(', time, ')','|', 'Logged in as', {client.user.name})
-
+    print('(', time_, ')','|', 'Logged in as', {client.user.name})
 
     # Start the random phrase sending loop
     await send_random_phrase()
@@ -38,11 +39,12 @@ async def on_ready():
 #function for random message
 async def send_random_phrase():
     x = 1
-    
+
     while True:
         #Making time work
         now = datetime.now()
         time = now.strftime("%H:%M:%S")
+
         #random channel picker
         channel_id = random.choice(random_channel)
         channel_name = client.get_channel(int(channel_id))
@@ -55,7 +57,7 @@ async def send_random_phrase():
 
         #message count sender
         if x<=1:
-            print('(', time, ')','|', {client.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name,)
+            print('(', time, ')','|', {client.user.name}, ': Has send ', x, 'Message', '|', 'Message sent in', ':', channel_name,)
             x=x+1
         else:
             print('(', time, ')','|', {client.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message')
@@ -71,4 +73,4 @@ async def send_random_phrase():
 
 
 #engine
-client.run(token)
+client.run(token_1)
