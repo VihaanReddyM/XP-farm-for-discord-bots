@@ -10,7 +10,7 @@ step 4. Save and close the config.json file and open the folder where all the fi
 step 5. Search for sarter.bat and double click it and the program will automatically run for you.
 
 # Features
-The features include :
+The features include :   
 &nbsp;&nbsp;&nbsp;&nbsp;1)You can use multiple tokens   
 &nbsp;&nbsp;&nbsp;&nbsp;2)The bot can use multiple channel ids and send a random sentence in anyone of the channel ids that you have provided it   
 &nbsp;&nbsp;&nbsp;&nbsp;3)Much knowledge for coding is not required.   
