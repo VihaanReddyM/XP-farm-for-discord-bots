@@ -1,5 +1,5 @@
 {
-    //Enter any two intervals here,they will be taken in sec in default
+    //Enter ywo intervals here,they will be taken in sec in default
     "intervals": {
         "min": 10,
         "max": 25
@@ -13,7 +13,8 @@
         ""
     ],
     //paste your token here
-    "token" :"PASTE-YOUR-TOKEN-HERE"
+    "token" :"PASTE-YOUR-TOKEN-HERE",
+    "token_1" :"Your alt token"
 
 
 }
