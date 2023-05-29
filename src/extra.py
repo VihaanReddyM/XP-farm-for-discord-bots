@@ -16,13 +16,16 @@ tracemalloc.start()
 settings_file = 'config/settings.json'
 phrases_file = 'config/phrases.json'
 
-
 with open(settings_file) as file:
     config_data = json.load(file)
     token = config_data['token']
     intervals = config_data['intervals']
     random_channel = config_data['channel_ids']
     prefix = config_data['prefix']
+
+with open(phrases_file) as file:
+    phrases_data = json.load(file)
+    phrases = phrases_data['phrases']
 
 with open(phrases_file) as file:
     phrases_data = json.load(file)

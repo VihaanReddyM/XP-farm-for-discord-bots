@@ -1,5 +1,4 @@
 @echo off
-cd /d %~dp0
-python bot.py
-python extra.py
-pause
+start "" src\bot.py
+start "" src\extra.py
+
