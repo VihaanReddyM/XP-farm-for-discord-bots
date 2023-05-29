@@ -13,7 +13,7 @@ import requests
 import random
 tracemalloc.start()
 
-settings_file = 'config/settings.json'
+settings_file = 'config/config.json'
 phrases_file = 'config/phrases.json'
 
 with open(settings_file) as file:
