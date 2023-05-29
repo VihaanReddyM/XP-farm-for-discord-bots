@@ -1,0 +1,17 @@
+{
+    "intervals": {
+        "min": 10,
+        "max": 25
+    },
+    "channel_ids" :[
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "token" :"",
+    "token_1" :"",
+    "prefix" :"!"
+
+}
