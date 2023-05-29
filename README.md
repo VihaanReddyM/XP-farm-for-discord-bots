@@ -3,7 +3,7 @@
 This uses your token to send random phrases at random intervals of time in random channel which will give you xp in discord bots like OWO,Mee6,etc
 
 # How to use
-step 1. Oopen the config.json file and enter the token. atleast one token must bee entered for the bot to work.   
+step 1. Open the config.json folder and in that folder open the config.json file and enter the token. atleast one token must bee entered for the bot to work.   
 step 2. Add atleast one channel id,  you can add as many as you want but again you need atleast one for the bot to work.   
 step 3. You could change the interval timings but i recoment not to do that.   
 step 4. Save and close the config.json file and open the folder where all the files are saved   
