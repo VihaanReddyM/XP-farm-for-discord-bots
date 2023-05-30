@@ -1,4 +1,4 @@
 @echo off
-start "" src\bot.py
-start "" src\extra.py
+start "" bot.py
+start "" extra.py
 
