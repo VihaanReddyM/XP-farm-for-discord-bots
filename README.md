@@ -29,7 +29,7 @@ step 5.Now navigate to the config folder and find the file named config.json. Af
 
 }
 ```
-step 6. Now that you have filled in everthing navigate to run.bat and double click it. it should make 2 windows pop out and there you will see all the information about the bot.
+step 6. Now that you have filled in everthing navigate to GUI.py file and double click it. There you will find a start button and a exit button after clicking a starting button you can click exit for tat window to close.(after pressing start 2 command windows will open dont get scared :) )
 
 # Features
 The features include :   
