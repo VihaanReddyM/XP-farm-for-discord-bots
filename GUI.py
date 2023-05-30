@@ -26,7 +26,7 @@ def program_stater():
 app = customtkinter.CTk()
 app.geometry("400x150")
 
-button = customtkinter.CTkButton(app, text="my button", command=program_stater)
+button = customtkinter.CTkButton(app, text="Start", command=program_stater)
 button.pack(padx=20, pady=20)
 
 exit_button = customtkinter.CTkButton(app, text="Exit", command=root.quit)
