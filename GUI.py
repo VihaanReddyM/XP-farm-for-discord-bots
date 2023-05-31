@@ -32,11 +32,12 @@ def profram_stopper():
 starter_button = customtkinter.CTkButton(app, text="Start the program", command=program_stater) 
 starter_button.grid(row=0, column=0, padx=20, pady=20)
 
-exit_button = customtkinter.CTkButton(app, text="Exit this window", command=close_window)
-exit_button.grid(row=1, column=0, padx=20, pady=20)
 
 stop_button = customtkinter.CTkButton(app, text="Stop the program", command=profram_stopper)
-stop_button.grid(row=2, column=0, padx=20, pady=20)
+stop_button.grid(row=1, column=0, padx=20, pady=20)
+
+exit_button = customtkinter.CTkButton(app, text="Exit this window", command=close_window)
+exit_button.grid(row=2, column=0, padx=20, pady=20)
 
 
 app.mainloop()
