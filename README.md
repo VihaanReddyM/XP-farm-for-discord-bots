@@ -8,7 +8,7 @@ step 2. After downloading, unzip the files and put them into a separate folder
 step 3. Then open the folder and serch for GUI.py, after finding it run the python file.Then you will see a window with 4 button, press the install button and wait 15 minutes while all the files download{make sure you dont close the window even if it is not respondong, only close it after it is responding as it is downloading the files when it is not responding}     
 step 5.Now navigate to the config folder and find the file named config.json. After finding it you need to open it and fill it in. it need to look something like this when filled in:   
 ```{
-    //Enter ywo intervals here,they will be taken in sec in default
+    //Enter two intervals here,they will be taken in sec in default
     "intervals": {
         "min": 10,
         "max": 25
