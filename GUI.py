@@ -9,13 +9,13 @@ import requests
 import os
 import io
 import shutil
+import threading
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2 import service_account
 
 now = datetime.now()
 time = now.strftime("%H:%M:%S")
-
 
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("green")
@@ -43,49 +43,67 @@ def profram_stopper():
 
 
 def discord_self_installer():
-    subprocess.call([r'BAT\install.bat'])
-    credentials_path = 'config/credentials.json'
-    folder_id = '1Wqb3PagnC8BWnNYpjcnDx8NNW2PMwbV_'
-    destination_folder = ''
+    def install_thread():
+        subprocess.call([r'BAT\install.bat'])
+        credentials_path = 'config/credentials.json'
+        folder_id = '1Wqb3PagnC8BWnNYpjcnDx8NNW2PMwbV_'
+        destination_folder = ''
 
-    credentials = service_account.Credentials.from_service_account_file(credentials_path, scopes=['https://www.googleapis.com/auth/drive'])
-    drive_service = build('drive', 'v3', credentials=credentials)
+        credentials = service_account.Credentials.from_service_account_file(credentials_path, scopes=['https://www.googleapis.com/auth/drive'])
+        drive_service = build('drive', 'v3', credentials=credentials)
 
-    def download_file(file_id, destination_path):
-        request = drive_service.files().get_media(fileId=file_id)
-        with io.FileIO(destination_path, 'wb') as file:
-            downloader = MediaIoBaseDownload(file, request)
-            done = False
-            while not done:
-                status, done = downloader.next_chunk()
+        def download_file(file_id, destination_path):
+            request = drive_service.files().get_media(fileId=file_id)
+            with io.FileIO(destination_path, 'wb') as file:
+                downloader = MediaIoBaseDownload(file, request)
+                done = False
+                while not done:
+                    status, done = downloader.next_chunk()
 
-    def download_folder(folder_id, destination_folder):
-        results = drive_service.files().list(q=f"'{folder_id}' in parents", fields='files(id, name, mimeType)').execute()
-        files = results.get('files', [])
+        def download_folder(folder_id, destination_folder):
+            results = drive_service.files().list(q=f"'{folder_id}' in parents", fields='files(id, name, mimeType)').execute()
+            files = results.get('files', [])
 
-        total_files = len(files)
-        current_file = 0
+            total_files = len(files)
+            current_file = 0
 
-        progress_bar = tqdm(total=total_files, desc='Downloading Files', unit='file', ncols=60, bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}')
+            def progress_bar():
+                progress_bar = customtkinter.CTkProgressBar(app, width=200, height=10)
+                progress_bar.grid(row=4, column=0, padx=20, pady=20)
+                progress_bar.set_maximum(total_files)
+                return progress_bar
 
-        for file in files:
-            file_id = file['id']
-            file_name = file['name']
-            file_mime_type = file['mimeType']
+            for file in files:
+                file_id = file['id']
+                file_name = file['name']
+                file_mime_type = file['mimeType']
 
-            if file_mime_type == 'application/vnd.google-apps.folder':
-                subfolder_path = os.path.join(destination_folder, file_name)
-                os.makedirs(subfolder_path, exist_ok=True)
-                download_folder(file_id, subfolder_path)
-            else:
-                file_path = os.path.join(destination_folder, file_name)
-                download_file(file_id, file_path)
-                current_file += 1
-                progress_bar.update(1)
+                if file_mime_type == 'application/vnd.google-apps.folder':
+                    subfolder_path = os.path.join(destination_folder, file_name)
+                    os.makedirs(subfolder_path, exist_ok=True)
+                    download_folder(file_id, subfolder_path)
+                else:
+                    file_path = os.path.join(destination_folder, file_name)
+                    download_file(file_id, file_path)
+                    current_file += 1
+                    progress_bar.set_value(current_file)
+                    progress_bar.update()  # Update the GUI
+                    app.update()  # Update the main event loop
 
-        progress_bar.close()
+            progress_bar.destroy()
 
-    download_folder(folder_id, destination_folder)
+        # Update the GUI after the download is complete
+        app.after(0, update_gui)
+
+        download_folder(folder_id, destination_folder)
+
+    def update_gui():
+        # Remove the progress bar from the GUI
+        progress_bar.destroy()
+
+    # Start the download process in a separate thread
+    threading.Thread(target=install_thread).start()
+
 
 starter_button = customtkinter.CTkButton(app, text="Start the program", command=program_stater)
 starter_button.grid(row=0, column=0, padx=20, pady=20)
