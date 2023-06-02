@@ -3,7 +3,7 @@
 This uses your token to send random phrases at random intervals of time in random channel which will give you xp in discord bots like OWO,Mee6,etc
 
 # How to use
-step 1. Download the latest version of the bot [HERE](https://github.com/VihaanReddyM/XP-farm-for-discord-bots/releases),make sure you have the latest version of python, download it [HERE](https://www.python.org/downloads/)
+step 1. Download the latest version of the bot [HERE](https://github.com/VihaanReddyM/XP-farm-for-discord-bots/releases),make sure you have the latest version of python, download it [HERE](https://www.python.org/downloads/)   
 step 2. After downloading, unzip the files and put them into a separate folder  
 step 3. Then open the folder and serch for GUI.py, after finding it run the python file.Then you will see a window with 4 button, press the install button and wait 15 minutes while all the files download{make sure you dont close the window even if it is not respondong, only close it after it is responding as it is downloading the files when it is not responding}     
 step 5.Now navigate to the config folder and find the file named config.json. After finding it you need to open it and fill it in. it need to look something like this when filled in:   
