@@ -1,4 +1,5 @@
 import sys
+import ctypes
 sys.path.insert(0, 'discord.py-self')
 import discord
 from discord.ext import commands
@@ -16,9 +17,12 @@ tracemalloc.start()
 settings_file = 'config/config.json'
 phrases_file = 'config/phrases.json'
 
+def set_window_title(title):
+    ctypes.windll.kernel32.SetConsoleTitleW(title)
+
 with open(settings_file) as file:
     config_data = json.load(file)
-    token = config_data['token']
+    token = config_data['token_1']
     intervals = config_data['intervals']
     random_channel = config_data['channel_ids']
     prefix = config_data['prefix']
@@ -36,6 +40,7 @@ bot = commands.Bot(command_prefix=prefix, self_bot=True)
 @bot.event
 async def on_ready():
     print("Logged in!")
+    set_window_title("Extra token")  # Set the desired window title
     await send_random_phrase()
 
 
