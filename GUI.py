@@ -18,9 +18,14 @@ from google.oauth2 import service_account
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
+file_path = 'BAT\install.bat'
+
+if ModuleNotFoundError:
+    os.system(file_path)
+
 
 customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("dark-blue")
+customtkinter.set_default_color_theme("green")
 
 app = customtkinter.CTk()
 app.title("Discord xp bot")
