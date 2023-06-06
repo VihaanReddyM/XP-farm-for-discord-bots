@@ -209,5 +209,4 @@ alt_saver.grid(row=3, column=1, padx=20, pady=20)
 New_channel_id_button = customtkinter.CTkButton(channel_id_tab, text="Add a new channel id",command=new_channel_id)
 New_channel_id_button.grid(row=0, column=0, padx=20, pady=20)
 
-
 app.mainloop()
