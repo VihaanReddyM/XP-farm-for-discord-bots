@@ -20,8 +20,7 @@ current_time = now.strftime("%H:%M:%S")
 
 file_path = 'BAT\install.bat'
 
-if ModuleNotFoundError:
-    os.system(file_path)
+
 
 
 customtkinter.set_appearance_mode("dark")
@@ -166,9 +165,22 @@ def save_data_to_json():
     with open(settings_file, 'w') as file:
         json.dump(config_data, file)
 
-def channel_id():
-    work_in_progress = customtkinter.CTkLabel(channel_id_tab, text="Work in progress")
-    work_in_progress.grid(row=1, column=0, padx=20, pady=20)
+row_counter = 1
+def new_channel_id():
+    global row_counter
+
+    new_channel_id = customtkinter.CTkEntry(channel_id_tab, placeholder_text="Enter your channel id", show="*")
+    new_channel_id.grid(row=0, column=row_counter, padx=20, pady=20)
+
+    channel_id_saver = customtkinter.CTkButton(channel_id_tab, text='Save the channel id')
+    channel_id_saver.grid(row=1, column=row_counter, padx=20, pady=20)
+
+    channel_id_entry_delete_button = customtkinter.CTkButton(channel_id_tab, text='Delete the channel id')
+    channel_id_entry_delete_button.grid(row=2, column=row_counter, padx=20, pady=20)
+
+    row_counter += 1
+    row_counter = row_counter
+    print(row_counter)
 
 starter_button = customtkinter.CTkButton(Main_tab, text="Start the program", command=program_stater)
 starter_button.grid(row=0, column=0, padx=20, pady=20)
@@ -194,9 +206,8 @@ alt_token_enter.grid(row=2, column=1, padx=20, pady=20)
 alt_saver = customtkinter.CTkButton(token_control, text='Save the alt token', command=alt_token)
 alt_saver.grid(row=3, column=1, padx=20, pady=20)
 
-New_channel_id_button = customtkinter.CTkButton(channel_id_tab, text="Add a new channel id",command=channel_id)
+New_channel_id_button = customtkinter.CTkButton(channel_id_tab, text="Add a new channel id",command=new_channel_id)
 New_channel_id_button.grid(row=0, column=0, padx=20, pady=20)
-
 
 app.protocol("WM_DELETE_WINDOW", close_window)
 app.mainloop()
