@@ -20,9 +20,6 @@ current_time = now.strftime("%H:%M:%S")
 
 file_path = 'BAT\install.bat'
 
-
-
-
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
 
