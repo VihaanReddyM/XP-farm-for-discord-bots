@@ -18,7 +18,6 @@ from google.oauth2 import service_account
 if ModuleNotFoundError:
     os.system(r"BAT\install.bat")
 
-
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
@@ -32,11 +31,11 @@ app.title("Discord xp bot")
 app.geometry("600x600")
 app.grid_columnconfigure(0, weight=1)
 
-#tab view
+# tab view
 tab_control = customtkinter.CTkTabview(app)
 tab_control.grid()
 
-#adding tabs
+# adding tabs
 # Create the first tab
 Main_tab = tab_control.add("Main tab")
 # Create the second tab
@@ -44,7 +43,7 @@ token_control = tab_control.add("tokens")
 # Create the third tab
 channel_id_tab = tab_control.add("channel_ids")
 
-#path to the JSON files, confurating JSON files
+# path to the JSON files, configuring JSON files
 settings_file = 'config/config.json'
 with open(settings_file) as file:
     config_data = json.load(file)
@@ -144,7 +143,7 @@ def discord_self_installer():
     threading.Thread(target=install_thread).start()
 
 
-def main_token():
+def main_token_callback():
     main_token = Main_token_enter.get()
     print("Successfully saved the Main token")
     config_data['token'] = main_token
@@ -153,7 +152,7 @@ def main_token():
     Main_token_enter.delete(0, customtkinter.END)
 
 
-def alt_token():
+def alt_token_callback():
     alt_token = alt_token_enter.get()
     print("Successfully saved the alt token")
     config_data['token_1'] = alt_token
@@ -166,48 +165,91 @@ def save_data_to_json():
     with open(settings_file, 'w') as file:
         json.dump(config_data, file)
 
-row_counter = 1
+
 def new_channel_id():
     global row_counter
 
-    new_channel_id = customtkinter.CTkEntry(channel_id_tab, placeholder_text="Enter your channel id", show="*")
-    new_channel_id.grid(row=0, column=row_counter, padx=20, pady=20)
+    def save_channel_id():
+        channel_id = new_channel_id_entry.get()
+        if channel_id:
+            config_data['channel_ids'].append(channel_id)
+            save_data_to_json()
+            new_channel_id_entry.delete(0, customtkinter.END)
 
-    channel_id_saver = customtkinter.CTkButton(channel_id_tab, text='Save the channel id')
+    def remove_channel_id():
+        channel_id = new_channel_id_entry.get()
+        if channel_id in config_data['channel_ids']:
+            config_data['channel_ids'].remove(channel_id)
+            save_data_to_json()
+            new_channel_id_entry.delete(0, customtkinter.END)
+
+    def update_channel_ids_list():
+        channel_ids_list.delete(0, customtkinter.END)
+        for channel_id in config_data['channel_ids']:
+            channel_ids_list.insert(customtkinter.END, channel_id)
+
+    new_channel_id_entry = customtkinter.CTkEntry(channel_id_tab, placeholder_text="Enter your channel id")
+    new_channel_id_entry.grid(row=0, column=row_counter, padx=20, pady=20)
+
+    channel_id_saver = customtkinter.CTkButton(channel_id_tab, text='Save the channel id', command=save_channel_id)
     channel_id_saver.grid(row=1, column=row_counter, padx=20, pady=20)
 
-    channel_id_entry_delete_button = customtkinter.CTkButton(channel_id_tab, text='Delete the channel id')
+    channel_id_entry_delete_button = customtkinter.CTkButton(channel_id_tab, text='Delete the channel id', command=remove_channel_id)
     channel_id_entry_delete_button.grid(row=2, column=row_counter, padx=20, pady=20)
 
     row_counter += 1
     row_counter = row_counter
-    print(row_counter)
+    update_channel_ids_list()
+
+
+# Update the channel_ids list with non-empty entries
+config_data['channel_ids'] = [channel_id for channel_id in config_data['channel_ids'] if channel_id]
 
 starter_button = customtkinter.CTkButton(Main_tab, text="Start the program", command=program_stater)
 starter_button.grid(row=0, column=0, padx=20, pady=20)
 
-exit_button = customtkinter.CTkButton(Main_tab, text="Exit", command=close_window)
+exit_button = customtkinter.CTkButton(Main_tab, text="Stop the program", command=profram_stopper)
 exit_button.grid(row=1, column=0, padx=20, pady=20)
 
-stop_button = customtkinter.CTkButton(Main_tab, text="Stop the program", command=profram_stopper)
-stop_button.grid(row=2, column=0, padx=20, pady=20)
+discord_self_installer_button = customtkinter.CTkButton(Main_tab, text="Self installer", command=discord_self_installer)
+discord_self_installer_button.grid(row=2, column=0, padx=20, pady=20)
 
-folder_installer = customtkinter.CTkButton(Main_tab, text="Install the required files", command=discord_self_installer)
-folder_installer.grid(row=3, column=0, padx=20, pady=20)
+close_button = customtkinter.CTkButton(Main_tab, text="Close", command=close_window)
+close_button.grid(row=3, column=0, padx=20, pady=20)
 
-Main_token_enter = customtkinter.CTkEntry(token_control, placeholder_text="Enter your main token", show="*")
+# token control
+
+Main_token_label = customtkinter.CTkLabel(token_control, text="Main token")
+Main_token_label.grid(row=0, column=0, padx=20, pady=20)
+
+Main_token_enter = customtkinter.CTkEntry(token_control, placeholder_text="Enter your main token")
 Main_token_enter.grid(row=0, column=1, padx=20, pady=20)
 
-token_saver = customtkinter.CTkButton(token_control, text='Save the main token', command=main_token)
-token_saver.grid(row=1, column=1, padx=20, pady=20)
+Main_token_button = customtkinter.CTkButton(token_control, text="Save", command=main_token_callback)
+Main_token_button.grid(row=0, column=2, padx=20, pady=20)
 
-alt_token_enter = customtkinter.CTkEntry(token_control, placeholder_text="Enter your alt token", show="*")
-alt_token_enter.grid(row=2, column=1, padx=20, pady=20)
+alt_token_label = customtkinter.CTkLabel(token_control, text="Alt token")
+alt_token_label.grid(row=1, column=0, padx=20, pady=20)
 
-alt_saver = customtkinter.CTkButton(token_control, text='Save the alt token', command=alt_token)
-alt_saver.grid(row=3, column=1, padx=20, pady=20)
+alt_token_enter = customtkinter.CTkEntry(token_control, placeholder_text="Enter your alt token")
+alt_token_enter.grid(row=1, column=1, padx=20, pady=20)
 
-New_channel_id_button = customtkinter.CTkButton(channel_id_tab, text="Add a new channel id",command=new_channel_id)
-New_channel_id_button.grid(row=0, column=0, padx=20, pady=20)
+alt_token_button = customtkinter.CTkButton(token_control, text="Save", command=alt_token_callback)
+alt_token_button.grid(row=1, column=2, padx=20, pady=20)
+
+# channel id tab
+
+scrollbar = customtkinter.CTkScrollbar(channel_id_tab, orientation="vertical")
+scrollbar.grid(row=0, column=1, sticky="ns", rowspan=3)
+
+channel_ids_list = customtkinter.CTkTextbox(channel_id_tab, yscrollcommand=scrollbar.set, width=40, height=10)
+channel_ids_list.grid(row=0, column=0, padx=20, pady=20)
+
+scrollbar.configure(command=channel_ids_list.yview)
+
+add_new_channel_id_button = customtkinter.CTkButton(channel_id_tab, text="Add new channel ID", command=new_channel_id)
+add_new_channel_id_button.grid(row=3, column=0, padx=20, pady=20)
+
+row_counter = 4
 
 app.mainloop()

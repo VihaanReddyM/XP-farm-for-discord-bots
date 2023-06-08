@@ -2,3 +2,6 @@ settings.json
 discord.py-self
 test.py
 config.json
+vscode
+config\config.json
+config/config.json
