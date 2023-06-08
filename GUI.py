@@ -15,6 +15,10 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2 import service_account
 
+if ModuleNotFoundError:
+    os.system(r"BAT\install.bat")
+
+
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
