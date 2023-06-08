@@ -2,6 +2,7 @@ import sys
 import ctypes
 sys.path.insert(0, 'discord.py-self')
 import discord
+import numpy as np
 from discord.ext import commands
 from datetime import datetime
 import aiohttp
@@ -16,6 +17,7 @@ tracemalloc.start()
 
 settings_file = 'config/config.json'
 phrases_file = 'config/phrases.json'
+average_time_interval = []
 
 def set_window_title(title):
     ctypes.windll.kernel32.SetConsoleTitleW(title)
@@ -45,6 +47,11 @@ async def ping(ctx):
     await ctx.send("Pong!")
 
 async def send_random_phrase():
+    def average_interval(min, max, average_time_interval, interval):
+        average_time_interval.append(interval)
+        return average_time_interval
+
+    average_time_taken = np.mean(average_interval)
     x = 1
     
     while True:
@@ -63,10 +70,10 @@ async def send_random_phrase():
 
         #message count sender
         if x<=1:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name,)
+            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Average time taken so far :', average_time_taken, 'seconds')
             x=x+1
         else:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message')
+            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message', '|', 'Average time taken so far :', average_time_taken, 'seconds')
             x=x+1
 
         # Send the random phrase to the specified channel
