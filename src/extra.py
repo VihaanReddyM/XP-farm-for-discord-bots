@@ -16,6 +16,7 @@ tracemalloc.start()
 
 settings_file = 'config/config.json'
 phrases_file = 'config/phrases.json'
+bot_file = 'config/Bot_id.json'
 
 def set_window_title(title):
     ctypes.windll.kernel32.SetConsoleTitleW(title)
@@ -31,9 +32,9 @@ with open(phrases_file) as file:
     phrases_data = json.load(file)
     phrases = phrases_data['phrases']
 
-with open(phrases_file) as file:
-    phrases_data = json.load(file)
-    phrases = phrases_data['phrases']
+with open(bot_file) as file:
+    bot_data = json.load(file)
+    bot_id = bot_data['bot_ID']
 
 bot = commands.Bot(command_prefix=prefix, self_bot=True)
 
@@ -41,44 +42,32 @@ bot = commands.Bot(command_prefix=prefix, self_bot=True)
 async def on_ready():
     print("Logged in!")
     set_window_title("Extra token")  # Set the desired window title
-    await send_random_phrase()
 
 
 @bot.command()
 async def ping(ctx):
     await ctx.send("Pong!")
 
-async def send_random_phrase():
-    x = 1
-    
-    while True:
+
+
+phrase = random.choice(phrases)
+
+@bot.event
+async def on_message(message):
+    x=1
+    if message.author.id == bot_id:
+        interval = random.randint(3, 7)
+        await asyncio.sleep(interval)
+        
+        await message.channel.send(phrase)
         #Making time work
         now = datetime.now()
         time = now.strftime("%H:%M:%S")
-        #random channel picker
-        channel_id = random.choice(random_channel)
-        channel_name = bot.get_channel(int(channel_id))
+        print('(', time, ')','|', {bot.user.name},'The bot will take', interval, 'seconds to send a message')
 
-        # Generate a random interval between min and max (in seconds)
-        interval = random.randint(intervals['min'], intervals['max'])
-
-        # Choose a random phrase from the list
-        phrase = random.choice(phrases)
-
-        #message count sender
-        if x<=1:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name,)
-            x=x+1
-        else:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message')
-            x=x+1
-
-        # Send the random phrase to the specified channel
-        channel = bot.get_channel(int(channel_id))
-        await channel.send(phrase)
-
-
-        # Wait for the interval before sending the next random phrase
-        await asyncio.sleep(interval)
+        x=x+1
+        
+        
+        
 
 bot.run(token)

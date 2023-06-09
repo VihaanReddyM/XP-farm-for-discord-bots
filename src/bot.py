@@ -17,6 +17,7 @@ tracemalloc.start()
 
 settings_file = 'config/config.json'
 phrases_file = 'config/phrases.json'
+main_user_id = 'config/bot_id.json'
 average_time_interval = []
 
 def set_window_title(title):
@@ -33,14 +34,22 @@ with open(phrases_file) as file:
     phrases_data = json.load(file)
     phrases = phrases_data['phrases']
 
+with open(main_user_id) as file:
+    id_data = json.load(file)
+    bot_id = id_data['bot_ID']
+
 bot = commands.Bot(command_prefix=prefix, self_bot=True)
+
 
 @bot.event
 async def on_ready():
+    bot_id = (bot.user.id)
+    id_data['bot_ID'] = bot_id
+    with open(main_user_id, 'w') as file:
+        json.dump(id_data, file)
     set_window_title("Main token")  # Set the desired window title
     print("Logged in!")
     await send_random_phrase()
-
 
 @bot.command()
 async def ping(ctx):
@@ -72,7 +81,7 @@ async def send_random_phrase():
             print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name)
             x=x+1
         else:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message')
+            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'The bot will take', interval, 'seconds to send a message')
             x=x+1
 
         # Send the random phrase to the specified channel

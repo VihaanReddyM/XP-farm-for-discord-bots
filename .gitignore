@@ -8,4 +8,3 @@ config.txt
 config\config.json
 .vs
 config/config.json
-*.json
