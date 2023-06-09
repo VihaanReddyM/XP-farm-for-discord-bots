@@ -51,7 +51,6 @@ async def send_random_phrase():
         average_time_interval.append(interval)
         return average_time_interval
 
-    average_time_taken = np.mean(average_interval)
     x = 1
     
     while True:
@@ -70,10 +69,10 @@ async def send_random_phrase():
 
         #message count sender
         if x<=1:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Average time taken so far :', average_time_taken, 'seconds')
+            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name)
             x=x+1
         else:
-            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message', '|', 'Average time taken so far :', average_time_taken, 'seconds')
+            print('(', time, ')','|', {bot.user.name}, ': Has send ', x, 'Messages', '|', 'Message sent in', ':', channel_name, '|', 'Has taken', interval, 'seconds to send a message')
             x=x+1
 
         # Send the random phrase to the specified channel
