@@ -7,3 +7,10 @@ config\config.json
 config/config.json
 config.txt
 config/config.json
+.vs/XP-farm-for-discord-bots/v17/.wsuo
+.vs/XP-farm-for-discord-bots/FileContentIndex/read.lock
+*.vsidx
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+config/config.json
