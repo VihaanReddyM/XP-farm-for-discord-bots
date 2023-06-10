@@ -1,11 +1,9 @@
 settings.json
 discord.py-self
 test.py
-config.json
 vscode
 config\config.json
 config.txt
-config\config.json
 .vs
 config/config.json
 .vs/XP-farm-for-discord-bots/v17/.wsuo
@@ -14,4 +12,4 @@ config/config.json
 .vs/ProjectSettings.json
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
-config/config.json
+config\Bot_id.json
